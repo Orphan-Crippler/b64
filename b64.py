@@ -35,4 +35,4 @@ def app(st):
         return
 
 while True:
-    app(st = input('\nEnter 1 to Encode\n\nEnter 2 to Decode\n\nEnter q to Quit\n'))
+    app(input('\nEnter 1 to Encode\n\nEnter 2 to Decode\n\nEnter q to Quit\n'))
