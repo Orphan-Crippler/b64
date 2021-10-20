@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 
+# Libraries
 from base64 import *
 
+# Messages
 warn = '!!!!!!!!!!!!!!!!!!!!!!!! WARNING: '
 valid = '\nPlease Enter a Valid Entry!\n'
+
+# Menu/Encode/Decode Logic
 def app(st):
 
     if st == '1':
@@ -30,5 +34,6 @@ def app(st):
         print(valid)
         return
 
+#Main Menu Loop
 while True:
     app(input('\nEnter 1 to Encode\n\nEnter 2 to Decode\n\nEnter q to Quit\n'))
