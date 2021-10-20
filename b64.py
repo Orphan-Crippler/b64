@@ -5,10 +5,7 @@ from base64 import *
 def app(st):
 
     if st == '1':
-        print('Enter M to return to main menu\n')
         code = input('Enter Stuff to Encode: ').encode()
-        if code.decode() == 'M':
-            return
         print('\n')
         try:
             ans = b64encode(code)
@@ -17,10 +14,7 @@ def app(st):
         except Exception as x:
             print('!!!!!!!!!!!!!!!!!!!!!!!! WARNING: ',x,'\n')
     elif st == '2':
-        print('Enter M to return to main menu\n')
         code = input('Enter Stuff to Decode: ').encode()
-        if code.decode() == 'M':
-            return
         print('\n')
         try:
             ans = b64decode(code)
