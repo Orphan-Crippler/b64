@@ -2,6 +2,8 @@
 
 from base64 import *
 
+warn = '!!!!!!!!!!!!!!!!!!!!!!!! WARNING: '
+valid = '\nPlease Enter a Valid Entry!\n'
 def app(st):
 
     if st == '1':
@@ -12,7 +14,7 @@ def app(st):
             print('\n',str(ans)[2:-1],'\n')
             return
         except Exception as x:
-            print('!!!!!!!!!!!!!!!!!!!!!!!! WARNING: ',x,'\n')
+            print(warn,x,'\n')
     elif st == '2':
         code = input('Enter Stuff to Decode: ').encode()
         print('\n')
@@ -21,11 +23,11 @@ def app(st):
             print('\n',str(ans)[2:-1],'\n')
             return
         except Exception as x:
-            print('!!!!!!!!!!!!!!!!!!!!!!!! WARNING: ',x,'\n')
+            print(warn,x,'\n')
     elif st == 'q':
         exit()
     else:
-        print('\nPlease Enter a Valid Entry!\n')
+        print(valid)
         return
 
 while True:
