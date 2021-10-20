@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Libraries
-from base64 import *
+from base64 import b64encode, b64decode
 
 # Messages
 warn = '!!!!!!!!!!!!!!!!!!!!!!!! WARNING: '
