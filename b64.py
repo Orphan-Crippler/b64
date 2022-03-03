@@ -36,4 +36,7 @@ def app(st):
 
 #Main Menu Loop
 while True:
-    app(input('\nEnter 1 to Encode\n\nEnter 2 to Decode\n\nEnter q to Quit\n'))
+	try:    
+		app(input('\nEnter 1 to Encode\n\nEnter 2 to Decode\n\nEnter q to Quit\n'))
+	except KeyboardInterrupt:
+		break
