@@ -37,14 +37,14 @@ root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 
 text = Text(mainframe, width=100, height=15)
-text.grid(column=0, row=0, sticky="N")
+ys = ttk.Scrollbar(mainframe, orient="vertical", command=text.yview)
+text["yscrollcommand"] = ys.set
+ys.grid(column=1, row=0, sticky="ns", pady=5)
+text.grid(column=0, row=0, sticky="N", pady=5)
 buttonL = ttk.Button(twoframe, text="Encode", command=encode)
 buttonR = ttk.Button(twoframe, text="Decode", command=decode)
 buttonL.grid(column=1, row=0, sticky="N", pady=5)
 buttonR.grid(column=1, row=1, sticky="N", pady=10)
-
-for child in mainframe.winfo_children():
-    child.grid_configure(padx=5, pady=5)
 text.focus()
 
 root.mainloop()
