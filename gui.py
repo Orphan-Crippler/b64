@@ -1,37 +1,50 @@
 from tkinter import *
-from tkinter import ttk
+from tkinter import ttk, messagebox
+from base64 import b64encode, b64decode
 
-def calculate(*args):
+
+def encode():
+    enc = text.get(1.0, "end-1c")
     try:
-        value = float(feet.get())
-        meters.set(int(0.3048 * value * 10000.0 + 0.5)/10000.0)
-    except ValueError:
-        pass
+        ans = b64encode(enc.encode())
+        text.delete(1.0, "end")
+        text.insert(1.0, str(ans)[2:-1])
+        return
+    except Exception as x:
+        messagebox.showerror(title="ERROR!", message=x)
+
+
+def decode():
+    dec = text.get(1.0, "end")
+    try:
+        ans = b64decode(dec.encode())
+        text.delete(1.0, "end")
+        text.insert(1.0, str(ans)[2:-1])
+        return
+    except Exception as x:
+        messagebox.showerror(title="ERROR!", message=x)
+
 
 root = Tk()
-root.title("Feet to Meters")
+root.title("Base64 Encode/Decode")
+root.resizable(FALSE, FALSE)
 
-mainframe = ttk.Frame(root, padding='3 3 12 12')
+mainframe = ttk.Frame(root, padding="3 3 12 12")
 mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
+twoframe = ttk.Frame(root, padding="3 3 12 12")
+twoframe.grid(column=1, row=0, sticky=("N, W, E, S"))
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 
-feet = StringVar()
-feet_entry = ttk.Entry(mainframe, width=7, textvariable=feet)
-feet_entry.grid(column=2, row=1, sticky=(W,E))
-
-meters = StringVar()
-ttk.Label(mainframe, textvariable=meters).grid(column=2, row=2, sticky=(W,E))
-
-ttk.Button(mainframe, text='Calculate', command=calculate).grid(column=3, row=3, sticky=W)
-ttk.Label(mainframe, text='feet').grid(column=3, row=1, sticky=W)
-ttk.Label(mainframe, text='is equivalent to').grid(column=1, row=2, sticky=E)
-ttk.Label(mainframe, text='meters').grid(column=3, row=2, sticky=W)
+text = Text(mainframe, width=100, height=15)
+text.grid(column=0, row=0, sticky="N")
+buttonL = ttk.Button(twoframe, text="Encode", command=encode)
+buttonR = ttk.Button(twoframe, text="Decode", command=decode)
+buttonL.grid(column=1, row=0, sticky="N", pady=5)
+buttonR.grid(column=1, row=1, sticky="N", pady=10)
 
 for child in mainframe.winfo_children():
     child.grid_configure(padx=5, pady=5)
-
-feet_entry.focus()
-root.bind('<Return>', calculate)
+text.focus()
 
 root.mainloop()
