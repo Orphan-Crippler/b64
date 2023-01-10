@@ -86,7 +86,7 @@ clearbutt.grid(column=1, row=2, sticky="S", pady=10)
 # Insert instructions into textbox and bring it into focus when starting up
 text.insert(
     "1.0",
-    "Enter or paste text to Encode/Decode here.\n\nThen press the appropriate button on the right.",
+    "\n\nBase64 Encoder/Decoder\nCreated By J.Low\n\nEnter or paste text to Encode/Decode here.\n\nThen press the appropriate button on the right.",
 )
 text.focus()
 
