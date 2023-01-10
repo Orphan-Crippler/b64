@@ -17,9 +17,9 @@ def encode():
 def decode():
     dec = text.get(1.0, "end")
     try:
-        ans = b64decode(dec.encode())
+        ans = b64decode(dec.encode()).decode('utf-8')
         text.delete(1.0, "end")
-        text.insert(1.0, str(ans)[2:-1])
+        text.insert(1.0, ans)
         return
     except Exception as x:
         messagebox.showerror(title="ERROR!", message=x)
@@ -45,6 +45,7 @@ buttonL = ttk.Button(twoframe, text="Encode", command=encode)
 buttonR = ttk.Button(twoframe, text="Decode", command=decode)
 buttonL.grid(column=1, row=0, sticky="N", pady=5)
 buttonR.grid(column=1, row=1, sticky="N", pady=10)
+text.insert('1.0', 'Enter or paste text to Encode/Decode here.\n\nThen press the appropriate button on the right.')
 text.focus()
 
 root.mainloop()
