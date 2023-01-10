@@ -1,4 +1,3 @@
 # Base64 Encoder/Decoder
-Simple script to Encode or Decode Base64
-
-Also made a GUI version using newest version of Tkinter. It is very barebones but gets the job done.
+Just a small program to learn the basics of newest version of Tkinter.
+It Encodeds and Decodes Base64 Strings. No context menus, just the two buttons for now.
