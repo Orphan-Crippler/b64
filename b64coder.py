@@ -47,6 +47,35 @@ root = Tk()
 root.title("Base64 Encode/Decode")
 root.resizable(FALSE, FALSE)
 
+# Working on implementing Filebar
+m = Menu(root, tearoff=0)
+f_edit = Menu(m)
+m.add_cascade(menu=f_edit, label="File")
+f_edit.add_command(label="New")
+m_edit = Menu(m)
+m.add_cascade(menu=m_edit, label="Edit")
+m_edit.add_command(
+    label="Cut", command=lambda: root.focus_get().event_generate("<<Cut>>")
+)
+m_edit.add_command(
+    label="Copy", command=lambda: root.focus_get().event_generate("<<Copy>>")
+)
+m_edit.add_command(
+    label="Paste", command=lambda: root.focus_get().event_generate("<<Paste>>")
+)
+m_edit.add_separator()
+m_edit.add_command(
+    label="Find", command=lambda: root.event_generate("<<OpenFindDialog>>")
+)
+root["menu"] = m
+
+
+def launchFindDialog(*args):
+    messagebox.showinfo(message="I hope you find what you are looking for!")
+
+
+root.bind("<<OpenFindDialog>>", launchFindDialog)
+
 # Setting up Frames
 mainframe = ttk.Frame(root, padding="3 3 3 3")
 mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
