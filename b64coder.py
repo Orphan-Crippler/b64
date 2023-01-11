@@ -42,17 +42,29 @@ def paste():
     text.event_generate("<<Paste>>")
 
 
+def about():
+    messagebox.showinfo(message="Base 64 Encoder/Decoder\nCreated By: J.Low")
+
+
+def quit():
+    exit()
+
+
 # Setting up Main Form
 root = Tk()
 root.title("Base64 Encode/Decode")
 root.resizable(FALSE, FALSE)
 
 # Working on implementing Filebar
-m = Menu(root, tearoff=0)
-f_edit = Menu(m)
+m = Menu(root)
+f_edit = Menu(m, tearoff=0)
 m.add_cascade(menu=f_edit, label="File")
-f_edit.add_command(label="New")
-m_edit = Menu(m)
+f_edit.add_command(label="New", underline=1)
+f_edit.add_command(label="Open", underline=1)
+f_edit.add_command(label="Close", underline=1)
+f_edit.add_separator()
+f_edit.add_command(label="Exit", underline=2, command=quit)
+m_edit = Menu(m, tearoff=0)
 m.add_cascade(menu=m_edit, label="Edit")
 m_edit.add_command(
     label="Cut", command=lambda: root.focus_get().event_generate("<<Cut>>")
