@@ -52,6 +52,7 @@ def quit():
 
 # Setting up Main Form
 root = Tk()
+root.iconbitmap("encrypt.ico")
 root.title("Base64 Encode/Decode")
 root.resizable(FALSE, FALSE)
 
@@ -61,6 +62,9 @@ f_edit = Menu(m, tearoff=0)
 m.add_cascade(menu=f_edit, label="File")
 f_edit.add_command(label="New", underline=1)
 f_edit.add_command(label="Open", underline=1)
+f_edit.add_command(label="Save", underline=1)
+f_edit.add_command(label="Save As")
+f_edit.add_separator()
 f_edit.add_command(label="Close", underline=1)
 f_edit.add_separator()
 f_edit.add_command(label="Exit", underline=2, command=quit)
