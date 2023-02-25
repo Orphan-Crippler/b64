@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk, messagebox
 from base64 import b64encode, b64decode
+import os
 
 # Encode and Decode Functions
 def encode():
@@ -52,7 +53,12 @@ def quit():
 
 # Setting up Main Form
 root = Tk()
-root.iconbitmap("encrypt.ico")
+
+if "nt" == os.name:
+    root.iconbitmap("encrypt.ico")
+else:
+    pass
+
 root.title("Base64 Encode/Decode")
 root.resizable(FALSE, FALSE)
 
