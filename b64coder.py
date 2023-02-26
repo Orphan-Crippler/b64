@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import ttk, messagebox, filedialog
+from tkinter import ttk, messagebox, filedialog, simpledialog
 from base64 import b64encode, b64decode
 import os
 
@@ -102,12 +102,6 @@ def paste():
     text.event_generate("<<Paste>>")
 
 
-def find():
-    messagebox.showwarning(
-        "Annoying Msg", "I hope you find what you are looking for..."
-    )
-
-
 # Setting up Main Form
 root = Tk()
 
@@ -143,8 +137,6 @@ m_edit.add_command(
 m_edit.add_command(
     label="Paste", command=lambda: root.focus_get().event_generate("<<Paste>>")
 )
-m_edit.add_separator()
-m_edit.add_command(label="Find", command=find)
 m_edit.add_separator()
 m_edit.add_command(label="Clear", underline=1, command=clear)
 
@@ -186,7 +178,7 @@ text.grid(column=0, row=0, sticky="N", pady=5)
 # Insert instructions into textbox and bring it into focus when starting up
 text.insert(
     "1.0",
-    "\n\nBase64 Encoder/Decoder\nCreated By J.Low\n\nEnter or paste text to Encode/Decode here.\n\nThen press the appropriate button on the right.",
+    "\n\nBase64 Encoder/Decoder\nCreated By J.Low\n\nEnter or paste text to Encode/Decode here.\n\nThen selct Encode/Decode from the Code Menu.",
 )
 text.focus()
 
