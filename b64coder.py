@@ -13,7 +13,7 @@ def nFile():
     )
 
     if msg_save == "yes":
-        saveAs()
+        sFileAs()
         clear()
     else:
         fileName = ""
@@ -37,7 +37,7 @@ def sFile():
     global fileName
 
     if fileName == "":
-        saveAs()
+        sFileAs()
     else:
         f = open(fileName, "w")
         txtSav = str(text.get(1.0, END))
@@ -102,6 +102,11 @@ def paste():
     text.event_generate("<<Paste>>")
 
 
+def find():
+    # Needs implementation
+    messagebox.showwarning("TODO", "Needs to be implemented...")
+
+
 # Setting up Main Form
 root = Tk()
 
@@ -138,7 +143,9 @@ m_edit.add_command(
     label="Paste", command=lambda: root.focus_get().event_generate("<<Paste>>")
 )
 m_edit.add_separator()
-m_edit.add_command(label="Clear", underline=1, command=clear)
+m_edit.add_command(label="Find", command=find)
+m_edit.add_separator()
+m_edit.add_command(label="Clear", underline=1, command=nFile)
 
 e_edit = Menu(m, tearoff=0)
 m.add_cascade(menu=e_edit, label="Code")
@@ -159,7 +166,10 @@ menu.add_command(label="Cut", command=cut)
 menu.add_command(label="Copy", command=copy)
 menu.add_command(label="Paste", command=paste)
 menu.add_separator()
-menu.add_command(label="Clear", command=clear)
+menu.add_command(label="Encode", command=encode)
+menu.add_command(label="Decode", command=decode)
+menu.add_separator()
+menu.add_command(label="Clear", command=nFile)
 
 # Check for right click on PC/Linux or Option/Click on macOS
 if root.tk.call("tk", "windowingsystem") == "aqua":
@@ -178,7 +188,7 @@ text.grid(column=0, row=0, sticky="N", pady=5)
 # Insert instructions into textbox and bring it into focus when starting up
 text.insert(
     "1.0",
-    "\n\nBase64 Encoder/Decoder\nCreated By J.Low\n\nEnter or paste text to Encode/Decode here.\n\nThen selct Encode/Decode from the Code Menu.",
+    "\n\nBase64 Encoder/Decoder\nCreated By J.Low\n\nEnter or paste text to Encode/Decode here.\n\nThen selct Encode/Decode from the Code Menu or Right Click and select from the context menu.",
 )
 text.focus()
 
