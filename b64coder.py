@@ -134,16 +134,16 @@ m = Menu(root)
 root["menu"] = m
 
 f_edit = Menu(m, tearoff=0)
-m.add_cascade(menu=f_edit, label="File")
-f_edit.add_command(label="New", underline=1, command=nFile)
-f_edit.add_command(label="Open", underline=1, command=oFile)
-f_edit.add_command(label="Save", underline=1, command=sFile)
+m.add_cascade(menu=f_edit, label="File", underline=0)
+f_edit.add_command(label="New", underline=0, command=nFile)
+f_edit.add_command(label="Open", underline=0, command=oFile)
+f_edit.add_command(label="Save", underline=0, command=sFile)
 f_edit.add_command(label="Save As", command=sFileAs)
 f_edit.add_separator()
-f_edit.add_command(label="Exit", underline=2, command=quit)
+f_edit.add_command(label="Exit", underline=1, command=quit)
 
 m_edit = Menu(m, tearoff=0)
-m.add_cascade(menu=m_edit, label="Edit")
+m.add_cascade(menu=m_edit, label="Edit", underline=0)
 m_edit.add_command(
     label="Cut", command=lambda: root.focus_get().event_generate("<<Cut>>")
 )
@@ -154,14 +154,14 @@ m_edit.add_command(
     label="Paste", command=lambda: root.focus_get().event_generate("<<Paste>>")
 )
 m_edit.add_separator()
-m_edit.add_command(label="Find", command=find)
+m_edit.add_command(label="Find", underline=0, command=find)
 m_edit.add_separator()
-m_edit.add_command(label="Clear", underline=1, command=nFile)
+m_edit.add_command(label="Clear", underline=0, command=nFile)
 
 e_edit = Menu(m, tearoff=0)
-m.add_cascade(menu=e_edit, label="Code")
-e_edit.add_command(label="Encode", command=encode)
-e_edit.add_command(label="Decode", command=decode)
+m.add_cascade(menu=e_edit, label="Code", underline=0)
+e_edit.add_command(label="Encode", underline=0, command=encode)
+e_edit.add_command(label="Decode", underline=0, command=decode)
 
 # Setting up Frames
 mainframe = ttk.Frame(root, padding="3 3 3 3")
