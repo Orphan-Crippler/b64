@@ -3,28 +3,37 @@ from tkinter import ttk, messagebox, filedialog, simpledialog
 from base64 import b64encode, b64decode
 import os
 
-fileName = ""
+fileName = "Startup"
 
 # File Functions
 def nFile():
     global fileName
-    msg_save = messagebox.askquestion(
-        "Save Document?", "Would you like to Save the current document?", icon="warning"
-    )
-
-    if msg_save == "yes":
-        sFileAs()
-        clear()
+    if fileName == "":
+        pass
     else:
-        fileName = ""
-        clear()
+        msg_save = messagebox.askquestion(
+            "Save Document?",
+            "Would you like to Save the current document?",
+            icon="warning",
+        )
+
+        if msg_save == "yes":
+            sFileAs()
+            clear()
+        else:
+            fileName = ""
+            clear()
 
 
 def oFile():
     global fileName
 
-    if text != "":
+    if fileName != "":
         clear()
+    elif fileName != "Startup":
+        clear()
+    else:
+        sFileAs()
 
     f = filedialog.askopenfile(mode="r")
     fileName = f.name
@@ -37,6 +46,8 @@ def sFile():
     global fileName
 
     if fileName == "":
+        sFileAs()
+    elif fileName == "Startup":
         sFileAs()
     else:
         f = open(fileName, "w")
@@ -155,8 +166,6 @@ e_edit.add_command(label="Decode", command=decode)
 # Setting up Frames
 mainframe = ttk.Frame(root, padding="3 3 3 3")
 mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
-twoframe = ttk.Frame(root, padding="3 3 3 3")
-twoframe.grid(column=1, row=0, sticky=("N, W, E, S"))
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 
@@ -179,7 +188,7 @@ else:
     root.bind("<3>", lambda e: menu.post(e.x_root, e.y_root))
 
 # Setup Textbox and Buttons
-text = Text(mainframe, width=100, height=15)
+text = Text(mainframe, width=100, height=20)
 ys = ttk.Scrollbar(mainframe, orient="vertical", command=text.yview)
 text["yscrollcommand"] = ys.set
 ys.grid(column=1, row=0, sticky="ns", pady=5)
@@ -188,7 +197,7 @@ text.grid(column=0, row=0, sticky="N", pady=5)
 # Insert instructions into textbox and bring it into focus when starting up
 text.insert(
     "1.0",
-    "\n\nBase64 Encoder/Decoder\nCreated By J.Low\n\nEnter or paste text to Encode/Decode here.\n\nThen selct Encode/Decode from the Code Menu or Right Click and select from the context menu.",
+    "\n\nBase64 Encoder/Decoder\nCreated By J.Low\n\nEnter or paste text to Encode/Decode here.\n\nThen select Encode/Decode from the Code Menu or Right Click and select from the context menu.",
 )
 text.focus()
 
