@@ -6,3 +6,5 @@ It Encodeds and Decodes Base64 Strings.
 Supports Opening and Saving to files text files.
 
 Supports Windows / Linux / macOS
+
+Custom Right Click Context menu setup for all OS.
