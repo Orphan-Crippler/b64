@@ -8,52 +8,59 @@ fileName = ""
 # File Functions
 def nFile():
     global fileName
-    msg_save = messagebox.askquestion('Save Document?', 'Would you like to Save the current document?', icon='warning')
-    
-    if msg_save == 'yes':
+    msg_save = messagebox.askquestion(
+        "Save Document?", "Would you like to Save the current document?", icon="warning"
+    )
+
+    if msg_save == "yes":
         saveAs()
         clear()
     else:
         fileName = ""
         clear()
 
+
 def oFile():
     global fileName
-    
+
     if text != "":
         clear()
 
-    f = filedialog.askopenfile(mode='r')
+    f = filedialog.askopenfile(mode="r")
     fileName = f.name
-    fn = open(f.name, 'r').read()
+    fn = open(f.name, "r").read()
     text.insert(1.0, fn)
     f.close()
 
+
 def sFile():
     global fileName
-    
+
     if fileName == "":
         saveAs()
     else:
         f = open(fileName, "w")
         txtSav = str(text.get(1.0, END))
         f.write(txtSav)
-        f.close() 
+        f.close()
+
 
 def sFileAs():
     global fileName
     f = filedialog.asksaveasfile(mode="w", defaultextension="")
-    
+
     if f is None:
         return
-    
+
     fileName = f.name
     txtSav = str(text.get(1.0, END))
     f.write(txtSav)
     f.close()
 
+
 def quit():
     exit()
+
 
 # Encode and Decode Functions
 def encode():
@@ -66,6 +73,7 @@ def encode():
     except Exception as x:
         messagebox.showerror(title="ERROR!", message=x)
 
+
 def decode():
     dec = text.get(1.0, "end")
     try:
@@ -76,18 +84,29 @@ def decode():
     except Exception as x:
         messagebox.showerror(title="ERROR!", message=x)
 
+
 # Textbox context commands
 def clear():
     text.delete(1.0, "end")
 
+
 def cut():
     text.event_generate("<<Cut>>")
+
 
 def copy():
     text.event_generate("<<Copy>>")
 
+
 def paste():
     text.event_generate("<<Paste>>")
+
+
+def find():
+    messagebox.showwarning(
+        "Annoying Msg", "I hope you find what you are looking for..."
+    )
+
 
 # Setting up Main Form
 root = Tk()
@@ -115,11 +134,17 @@ f_edit.add_command(label="Exit", underline=2, command=quit)
 
 m_edit = Menu(m, tearoff=0)
 m.add_cascade(menu=m_edit, label="Edit")
-m_edit.add_command(label="Cut", command=lambda: root.focus_get().event_generate("<<Cut>>"))
-m_edit.add_command(label="Copy", command=lambda: root.focus_get().event_generate("<<Copy>>"))
-m_edit.add_command(label="Paste", command=lambda: root.focus_get().event_generate("<<Paste>>"))
+m_edit.add_command(
+    label="Cut", command=lambda: root.focus_get().event_generate("<<Cut>>")
+)
+m_edit.add_command(
+    label="Copy", command=lambda: root.focus_get().event_generate("<<Copy>>")
+)
+m_edit.add_command(
+    label="Paste", command=lambda: root.focus_get().event_generate("<<Paste>>")
+)
 m_edit.add_separator()
-m_edit.add_command(label="Find")
+m_edit.add_command(label="Find", command=find)
 m_edit.add_separator()
 m_edit.add_command(label="Clear", underline=1, command=clear)
 
