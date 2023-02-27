@@ -1,3 +1,4 @@
+import tkinter as tk
 from tkinter import *
 from tkinter import ttk, messagebox, filedialog, simpledialog
 from base64 import b64encode, b64decode
@@ -128,9 +129,27 @@ else:
     pass
 
 root.title("Base64 Encode/Decode")
+root.columnconfigure(0, weight=1)
+root.rowconfigure(0, weight=1)
 root.resizable(TRUE, TRUE)
 
-# Working on implementing Filebar
+# Setting up Frames
+mainframe = ttk.Frame(root, padding="3 3 3 3")
+mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
+mainframe.columnconfigure(0, weight=1)
+mainframe.rowconfigure(0, weight=1)
+
+# Setup Textbox and Scrollbars
+text = Text(mainframe, width=100, height=20, wrap="none")
+ys = ttk.Scrollbar(mainframe, orient="vertical", command=text.yview)
+xs = ttk.Scrollbar(mainframe, orient="horizontal", command=text.xview)
+text["yscrollcommand"] = ys.set
+text["xscrollcommand"] = xs.set
+ys.grid(column=1, row=0, sticky="ns")
+xs.grid(column=0, row=1, sticky="we")
+text.grid(column=0, row=0, sticky="N W E S")
+
+# Filebar
 m = Menu(root)
 root["menu"] = m
 
@@ -164,15 +183,7 @@ m.add_cascade(menu=e_edit, label="Code", underline=0)
 e_edit.add_command(label="Encode", underline=0, command=encode)
 e_edit.add_command(label="Decode", underline=0, command=decode)
 
-# Setting up Frames
-mainframe = ttk.Frame(root, padding="3 3 3 3")
-mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
-mainframe.columnconfigure(0, weight=1)
-mainframe.rowconfigure(0, weight=1)
-root.columnconfigure(0, weight=1)
-root.rowconfigure(0, weight=1)
-
-# Setting up Context Menu
+# Setting up Right Click Context Menu
 menu = Menu(root, tearoff=0)
 menu.add_command(label="Cut", command=cut)
 menu.add_command(label="Copy", command=copy)
@@ -189,16 +200,6 @@ if root.tk.call("tk", "windowingsystem") == "aqua":
     root.bind("<Control-1>", lambda e: menu.post(e.x_root, e.y_root))
 else:
     root.bind("<3>", lambda e: menu.post(e.x_root, e.y_root))
-
-# Setup Textbox and Buttons
-text = Text(mainframe, width=100, height=20, wrap="none")
-ys = ttk.Scrollbar(mainframe, orient="vertical", command=text.yview)
-xs = ttk.Scrollbar(mainframe, orient="horizontal", command=text.xview)
-text["yscrollcommand"] = ys.set
-text["xscrollcommand"] = xs.set
-ys.grid(column=1, row=0, sticky="ns")
-xs.grid(column=0, row=1, sticky="we")
-text.grid(column=0, row=0, sticky="N W E S")
 
 # Insert instructions into textbox and bring it into focus when starting up
 text.insert(
