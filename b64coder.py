@@ -20,9 +20,11 @@ def nFile():
         if msg_save == "yes":
             sFileAs()
             clear()
+            Text.insert(1.0, "")
         else:
             fileName = ""
             clear()
+            Text.insert(1.0, "")
 
 
 def oFile():
@@ -114,8 +116,7 @@ def paste():
 
 
 def find():
-    # Needs implementation
-    messagebox.showwarning("TODO", "Needs to be implemented...")
+    pass
 
 
 # Setting up Main Form
@@ -127,7 +128,7 @@ else:
     pass
 
 root.title("Base64 Encode/Decode")
-root.resizable(FALSE, FALSE)
+root.resizable(TRUE, TRUE)
 
 # Working on implementing Filebar
 m = Menu(root)
@@ -166,6 +167,8 @@ e_edit.add_command(label="Decode", underline=0, command=decode)
 # Setting up Frames
 mainframe = ttk.Frame(root, padding="3 3 3 3")
 mainframe.grid(column=0, row=0, sticky=(N, W, E, S))
+mainframe.columnconfigure(0, weight=1)
+mainframe.rowconfigure(0, weight=1)
 root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 
@@ -188,11 +191,14 @@ else:
     root.bind("<3>", lambda e: menu.post(e.x_root, e.y_root))
 
 # Setup Textbox and Buttons
-text = Text(mainframe, width=100, height=20)
+text = Text(mainframe, width=100, height=20, wrap="none")
 ys = ttk.Scrollbar(mainframe, orient="vertical", command=text.yview)
+xs = ttk.Scrollbar(mainframe, orient="horizontal", command=text.xview)
 text["yscrollcommand"] = ys.set
-ys.grid(column=1, row=0, sticky="ns", pady=5)
-text.grid(column=0, row=0, sticky="N", pady=5)
+text["xscrollcommand"] = xs.set
+ys.grid(column=1, row=0, sticky="ns")
+xs.grid(column=0, row=1, sticky="we")
+text.grid(column=0, row=0, sticky="N W E S")
 
 # Insert instructions into textbox and bring it into focus when starting up
 text.insert(
